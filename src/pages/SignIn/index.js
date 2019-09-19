@@ -13,7 +13,7 @@ import logo from '~/assets/logo.png';
 
 import Background from '~/components/Background';
 
-export default function SignIn() {
+export default function SignIn({ navigation }) {
   return (
     <Background>
       <Container>
@@ -32,7 +32,7 @@ export default function SignIn() {
           <SubmitButton onPress={() => {}}>Entrar</SubmitButton>
         </Form>
 
-        <SignLink onPress={() => {}}>
+        <SignLink onPress={() => navigation.navigate('SignUp')}>
           <SignLinkText>Criar conta grátis</SignLinkText>
         </SignLink>
       </Container>
