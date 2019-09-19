@@ -1,8 +1,15 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Text, SafeAreaView } from 'react-native';
 
 // import { Container } from './styles';
+import Background from '~/components/Background';
 
 export default function SignUp() {
-  return <View />;
+  return (
+    <Background>
+      <SafeAreaView>
+        <Text>Login</Text>
+      </SafeAreaView>
+    </Background>
+  );
 }
