@@ -28,7 +28,9 @@ export default function Dashboard() {
         <List
           data={data}
           keyExtractor={item => String(item)}
-          renderItem={({ item }) => <Meetup data={item} />}
+          renderItem={({ item }) => (
+            <Meetup titleButton="Realizar Inscricao" data={item} />
+          )}
         />
       </Container>
     </Background>

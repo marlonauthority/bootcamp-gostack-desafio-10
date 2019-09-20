@@ -14,11 +14,10 @@ import {
   PlaceText,
   Owner,
   OwnerText,
-  SubmitButton,
-  SubmitButtonText,
+  TitleButton,
 } from './styles';
 
-export default function Meetup() {
+export default function Meetup({ titleButton }) {
   return (
     <Wrapper>
       <Banner source={{ uri: 'https://picsum.photos/id/992/940/300' }} />
@@ -40,9 +39,7 @@ export default function Meetup() {
             <OwnerText>Organizador: Diego Fernandes</OwnerText>
           </Owner>
         </Info>
-        <SubmitButton onPress={() => {}}>
-          <SubmitButtonText>Realizar inscrição</SubmitButtonText>
-        </SubmitButton>
+        <TitleButton onPress={() => {}}>{titleButton}</TitleButton>
       </Container>
     </Wrapper>
   );

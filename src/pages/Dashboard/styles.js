@@ -10,14 +10,13 @@ export const DateNavigator = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin: 30px 0;
 `;
 
 export const DateText = styled.Text`
   font-size: 20px;
   font-weight: bold;
   color: #fff;
-  margin: 0 15px;
 `;
 
 export const List = styled.FlatList.attrs({

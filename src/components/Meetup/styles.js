@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
+import Button from '~/components/Button';
 
 export const Wrapper = styled.View`
-  margin-top: 30px;
   background: #fff;
   border-radius: 4px;
 `;
@@ -64,16 +64,6 @@ export const OwnerText = styled.Text`
   margin: 0 5px;
 `;
 
-export const SubmitButton = styled.TouchableOpacity`
-  background: #f94d6a;
+export const TitleButton = styled(Button)`
   margin-top: 15px;
-  border-radius: 4px;
-  padding: 11px;
-`;
-
-export const SubmitButtonText = styled.Text`
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  color: #fff;
 `;
