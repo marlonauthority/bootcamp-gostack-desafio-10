@@ -16,14 +16,6 @@ export function* signIn({ payload }) {
 
     const { token, user } = response.data;
 
-    if (user.provider) {
-      Alert.alert(
-        'Erro no login',
-        'Usuário não pode ser prestador de serviços!'
-      );
-
-      return;
-    }
     // -> Seta um header em todas as requisicoes
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
