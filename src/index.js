@@ -4,19 +4,18 @@ import { Provider } from 'react-redux';
 import { StatusBar } from 'react-native';
 import './config/ReactotronConfig';
 
-import Routes from './routes';
-
 import { store, persistor } from '~/store';
+import App from './App';
 
-const App = () => {
+const Index = () => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <StatusBar barStyle="light-content" backgroundColor="#22202C" />
-        <Routes />
+        <App />
       </PersistGate>
     </Provider>
   );
 };
 
-export default App;
+export default Index;
