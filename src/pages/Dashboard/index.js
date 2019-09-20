@@ -9,7 +9,7 @@ import Background from '~/components/Background';
 import Header from '~/components/Header';
 import Meetup from '~/components/Meetup';
 
-export default function Dashboard() {
+export default function Dashboard({ navigation }) {
   const [meetups, setMeetups] = useState([]);
 
   useEffect(() => {
@@ -19,6 +19,11 @@ export default function Dashboard() {
     }
     loadMeetups();
   }, []);
+
+  async function handleSubscription(id) {
+    await api.post(`/meetups/${id}/subscription`);
+    navigation.navigate('Registrations');
+  }
 
   return (
     <Background>
@@ -39,7 +44,11 @@ export default function Dashboard() {
           data={meetups}
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
-            <Meetup titleButton="Realizar Inscricao" data={item} />
+            <Meetup
+              titleButton="Realizar Inscricao"
+              onSubscription={() => handleSubscription(item.id)}
+              data={item}
+            />
           )}
         />
       </Container>

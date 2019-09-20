@@ -20,8 +20,7 @@ import {
   TitleButton,
 } from './styles';
 
-export default function Meetup({ titleButton, data }) {
-  console.tron.log(data);
+export default function Meetup({ titleButton, onSubscription, data }) {
   const dateFormatted = useMemo(() => {
     return format(parseISO(data.date_hour), "dd 'de' MMMM', às ' HH:mm'", {
       locale: pt,
@@ -54,7 +53,7 @@ export default function Meetup({ titleButton, data }) {
           </Owner>
         </Info>
         {!data.past && (
-          <TitleButton onPress={() => {}}>{titleButton}</TitleButton>
+          <TitleButton onPress={onSubscription}>{titleButton}</TitleButton>
         )}
       </Container>
     </Wrapper>
