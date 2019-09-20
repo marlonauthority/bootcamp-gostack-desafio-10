@@ -5,13 +5,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 // import { Container } from './styles';
 import Background from '~/components/Background';
 
-export default function Profile() {
+export default function Registrations() {
   return <Background />;
 }
-
-Profile.navigationOptions = {
-  tabBarLabel: 'Meu perfil',
+Registrations.navigationOptions = {
+  tabBarLabel: 'Inscrições',
   tabBarIcon: ({ tintColor }) => (
-    <Icon name="person" size={20} color={tintColor} />
+    <Icon name="local-offer" size={20} color={tintColor} />
   ),
 };
