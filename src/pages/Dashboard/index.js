@@ -1,15 +1,36 @@
 import React from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-// import { Container } from './styles';
+import { Container, List, DateNavigator, DateText } from './styles';
 import Background from '~/components/Background';
 import Header from '~/components/Header';
+import Meetup from '~/components/Meetup';
+
+const data = [1, 2, 3, 4, 5];
 
 export default function Dashboard() {
   return (
     <Background>
-      <Header />
+      <Container>
+        <Header />
+
+        <DateNavigator>
+          <TouchableOpacity onPress={() => {}}>
+            <Icon name="chevron-left" size={30} color="#fff" />
+          </TouchableOpacity>
+          <DateText>31 de Maio</DateText>
+          <TouchableOpacity onPress={() => {}}>
+            <Icon name="chevron-right" size={30} color="#fff" />
+          </TouchableOpacity>
+        </DateNavigator>
+
+        <List
+          data={data}
+          keyExtractor={item => String(item)}
+          renderItem={({ item }) => <Meetup data={item} />}
+        />
+      </Container>
     </Background>
   );
 }
