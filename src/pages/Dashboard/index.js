@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import api from '~/services/api';
 
 import { Container, List, DateNavigator, DateText } from './styles';
 import Background from '~/components/Background';
 import Header from '~/components/Header';
 import Meetup from '~/components/Meetup';
 
-const data = [1, 2, 3, 4, 5];
-
 export default function Dashboard() {
+  const [meetups, setMeetups] = useState([]);
+
+  useEffect(() => {
+    async function loadMeetups() {
+      const response = await api.get('/meetups');
+      setMeetups(response.data);
+    }
+    loadMeetups();
+  }, []);
+
   return (
     <Background>
       <Container>
@@ -26,8 +36,8 @@ export default function Dashboard() {
         </DateNavigator>
 
         <List
-          data={data}
-          keyExtractor={item => String(item)}
+          data={meetups}
+          keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
             <Meetup titleButton="Realizar Inscricao" data={item} />
           )}

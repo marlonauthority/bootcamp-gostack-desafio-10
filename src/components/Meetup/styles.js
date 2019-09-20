@@ -4,6 +4,7 @@ import Button from '~/components/Button';
 export const Wrapper = styled.View`
   background: #fff;
   border-radius: 4px;
+  opacity: ${props => (props.past ? 0.6 : 1)};
 `;
 
 export const Container = styled.View`
