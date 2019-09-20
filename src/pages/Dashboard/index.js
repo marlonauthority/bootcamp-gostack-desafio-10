@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { TouchableOpacity } from 'react-native';
+import { format, subDays, addDays } from 'date-fns';
+import pt from 'date-fns/locale/pt-BR';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '~/services/api';
@@ -11,14 +13,28 @@ import Meetup from '~/components/Meetup';
 
 export default function Dashboard({ navigation }) {
   const [meetups, setMeetups] = useState([]);
+  const [date, setDate] = useState(new Date());
+
+  const dateNavigator = useMemo(
+    () => format(date, "d 'de' MMMM", { locale: pt }),
+    [date]
+  );
+  function handlePrevDay() {
+    setDate(subDays(date, 1));
+  }
+  function handleNextDay() {
+    setDate(addDays(date, 1));
+  }
 
   useEffect(() => {
     async function loadMeetups() {
-      const response = await api.get('/meetups');
+      const response = await api.get('/meetups', {
+        params: { date },
+      });
       setMeetups(response.data);
     }
     loadMeetups();
-  }, []);
+  }, [date]);
 
   async function handleSubscription(id) {
     await api.post(`/meetups/${id}/subscription`);
@@ -31,11 +47,11 @@ export default function Dashboard({ navigation }) {
         <Header />
 
         <DateNavigator>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={handlePrevDay}>
             <Icon name="chevron-left" size={30} color="#fff" />
           </TouchableOpacity>
-          <DateText>31 de Maio</DateText>
-          <TouchableOpacity onPress={() => {}}>
+          <DateText>{dateNavigator}</DateText>
+          <TouchableOpacity onPress={handleNextDay}>
             <Icon name="chevron-right" size={30} color="#fff" />
           </TouchableOpacity>
         </DateNavigator>

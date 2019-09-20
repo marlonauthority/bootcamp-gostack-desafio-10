@@ -17,6 +17,7 @@ export const DateText = styled.Text`
   font-size: 20px;
   font-weight: bold;
   color: #fff;
+  margin: 0 15px;
 `;
 
 export const List = styled.FlatList.attrs({
