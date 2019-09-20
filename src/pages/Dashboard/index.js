@@ -4,9 +4,14 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 // import { Container } from './styles';
 import Background from '~/components/Background';
+import Header from '~/components/Header';
 
 export default function Dashboard() {
-  return <Background />;
+  return (
+    <Background>
+      <Header />
+    </Background>
+  );
 }
 Dashboard.navigationOptions = {
   tabBarLabel: 'Meetups',
