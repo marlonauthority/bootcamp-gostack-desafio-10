@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { TouchableOpacity, ActivityIndicator } from 'react-native';
+import { TouchableOpacity, ActivityIndicator, Text } from 'react-native';
 
 import { format, subDays, addDays } from 'date-fns';
 import pt from 'date-fns/locale/pt-BR';
@@ -11,6 +11,7 @@ import { Container, List, DateNavigator, DateText } from './styles';
 import Background from '~/components/Background';
 import Header from '~/components/Header';
 import Meetup from '~/components/Meetup';
+import Empty from '~/components/Empty';
 
 export default function Dashboard({ navigation }) {
   const [meetups, setMeetups] = useState([]);
@@ -73,6 +74,7 @@ export default function Dashboard({ navigation }) {
                   data={item}
                 />
               )}
+              ListEmptyComponent={<Empty>Não existem Meetups nesta data</Empty>}
             />
           </>
         )}

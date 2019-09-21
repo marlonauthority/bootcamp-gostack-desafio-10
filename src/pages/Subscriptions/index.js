@@ -15,6 +15,7 @@ import { Container, List } from './styles';
 import Background from '~/components/Background';
 import Header from '~/components/Header';
 import Subscription from '~/components/Subscription';
+import Empty from '~/components/Empty';
 
 function Subscriptions({ isFocused }) {
   const dispatch = useDispatch();
@@ -46,6 +47,9 @@ function Subscriptions({ isFocused }) {
                 data={item}
               />
             )}
+            ListEmptyComponent={
+              <Empty>Você não possui nenhuma inscrição nos meetups</Empty>
+            }
           />
         )}
       </Container>
