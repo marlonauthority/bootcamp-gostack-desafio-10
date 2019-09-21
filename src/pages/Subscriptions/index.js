@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { withNavigationFocus } from 'react-navigation';
 
@@ -19,6 +19,7 @@ import Subscription from '~/components/Subscription';
 function Subscriptions({ isFocused }) {
   const dispatch = useDispatch();
   const data = useSelector(state => state.meetup.subscriptions);
+  const loading = useSelector(state => state.meetup.loading);
 
   useEffect(() => {
     if (isFocused) {
@@ -33,16 +34,20 @@ function Subscriptions({ isFocused }) {
     <Background>
       <Container>
         <Header />
-        <List
-          data={data}
-          keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => (
-            <Subscription
-              cancelSubscription={() => handleCancelSubscription(item.id)}
-              data={item}
-            />
-          )}
-        />
+        {loading ? (
+          <ActivityIndicator size="large" color="#fff" />
+        ) : (
+          <List
+            data={data}
+            keyExtractor={item => String(item.id)}
+            renderItem={({ item }) => (
+              <Subscription
+                cancelSubscription={() => handleCancelSubscription(item.id)}
+                data={item}
+              />
+            )}
+          />
+        )}
       </Container>
     </Background>
   );

@@ -14,9 +14,10 @@ export default function meetup(state = INITIAL_STATE, action) {
       }
       case '@meetup/LOAD_SUBSCRIPTIONS_SUCCESS': {
         draft.loading = false;
-        // draft.subscriptions = action.payload.data;
+        draft.subscriptions = action.payload.data;
         break;
       }
+
       case '@meetup/MEETUP_FAILURE': {
         draft.loading = false;
         break;

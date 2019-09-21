@@ -4,6 +4,7 @@ import { all, takeLatest, call, put } from 'redux-saga/effects';
 import api from '~/services/api';
 
 import {
+  loadSubscriptionsRequest,
   loadSubscriptionsSuccess,
   meetupFailure,
   cancelSubscriptionSuccess,
@@ -22,6 +23,7 @@ export function* cancelSubscription({ payload }) {
   try {
     const { id } = payload;
     yield call(api.delete, `/meetups/${id}/cancelsubscription`);
+    yield put(loadSubscriptionsRequest());
     yield put(cancelSubscriptionSuccess());
   } catch (err) {
     yield put(meetupFailure());
