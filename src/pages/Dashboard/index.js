@@ -38,7 +38,7 @@ export default function Dashboard({ navigation }) {
 
   async function handleSubscription(id) {
     await api.post(`/meetups/${id}/subscription`);
-    navigation.navigate('Registrations');
+    navigation.navigate('Subscriptions');
   }
 
   return (
@@ -61,7 +61,7 @@ export default function Dashboard({ navigation }) {
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
             <Meetup
-              titleButton="Realizar Inscricao"
+              titleButton="Realizar inscrição"
               onSubscription={() => handleSubscription(item.id)}
               data={item}
             />
