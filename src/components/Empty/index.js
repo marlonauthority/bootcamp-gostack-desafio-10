@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Wrapper, Container, Info, Title } from './styles';
 
@@ -13,3 +14,6 @@ export default function Empty({ children }) {
     </Wrapper>
   );
 }
+Empty.propTypes = {
+  children: PropTypes.string.isRequired,
+};

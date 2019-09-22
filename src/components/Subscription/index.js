@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt-BR';
@@ -65,3 +66,10 @@ export default function Subscription({ data, cancelSubscription }) {
     </Wrapper>
   );
 }
+Subscription.propTypes = {
+  cancelSubscription: PropTypes.func,
+  data: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+};
+Subscription.defaultProps = {
+  cancelSubscription: PropTypes.func,
+};

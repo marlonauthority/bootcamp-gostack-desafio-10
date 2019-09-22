@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt-BR';
@@ -59,3 +60,8 @@ export default function Meetup({ titleButton, onSubscription, data }) {
     </Wrapper>
   );
 }
+Meetup.propTypes = {
+  titleButton: PropTypes.string.isRequired,
+  onSubscription: PropTypes.func.isRequired,
+  data: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+};
