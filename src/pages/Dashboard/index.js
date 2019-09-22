@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { TouchableOpacity, ActivityIndicator, Text } from 'react-native';
+import { TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 
 import { format, subDays, addDays } from 'date-fns';
 import pt from 'date-fns/locale/pt-BR';
@@ -43,6 +43,7 @@ export default function Dashboard({ navigation }) {
 
   async function handleSubscription(id) {
     await api.post(`/meetups/${id}/subscription`);
+    Alert.alert('Sucesso!', 'Você se inscreveu para o meetup!');
     navigation.navigate('Subscriptions');
   }
 

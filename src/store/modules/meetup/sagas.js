@@ -23,6 +23,7 @@ export function* cancelSubscription({ payload }) {
   try {
     const { id } = payload;
     yield call(api.delete, `/meetups/${id}/cancelsubscription`);
+    Alert.alert('Você cancelou a inscrição para o meetup');
     yield put(loadSubscriptionsRequest());
     yield put(cancelSubscriptionSuccess());
   } catch (err) {
