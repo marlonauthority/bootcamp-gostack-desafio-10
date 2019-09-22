@@ -1,5 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import * as Yup from 'yup';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
@@ -15,6 +18,19 @@ import Header from '~/components/Header';
 
 import { updateProfileRequest } from '~/store/modules/user/actions';
 import { signOut } from '~/store/modules/auth/actions';
+
+const schema = Yup.object().shape({
+  name: Yup.string().required('O nome é obrigatório'),
+  email: Yup.string()
+    .email('Digite um e-mail válido.')
+    .required('O email é obrigatório'),
+  oldPassword: Yup.string(),
+  password: Yup.string(),
+  confirmPassword: Yup.string().oneOf(
+    [Yup.ref('password')],
+    'Campo não são identicos.'
+  ),
+});
 
 export default function Profile() {
   const profile = useSelector(state => state.user.profile);
@@ -39,16 +55,14 @@ export default function Profile() {
     setConfirmPassword('');
   }, [profile]);
 
-  function handleSubmit() {
-    dispatch(
-      updateProfileRequest({
-        name,
-        email,
-        oldPassword,
-        password,
-        confirmPassword,
-      })
-    );
+  async function handleSubmit() {
+    const data = { name, email, oldPassword, password, confirmPassword };
+    try {
+      await schema.validate(data);
+      dispatch(updateProfileRequest(data));
+    } catch (err) {
+      Alert.alert('Erro', 'Ocorreu algum nos campos');
+    }
   }
 
   function handleLogout() {
