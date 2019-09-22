@@ -2,11 +2,19 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Container, Form, Separator, FormInput, SubmitButton } from './styles';
+import {
+  Container,
+  Form,
+  Separator,
+  FormInput,
+  SubmitButton,
+  LogoutButton,
+} from './styles';
 import Background from '~/components/Background';
 import Header from '~/components/Header';
 
 import { updateProfileRequest } from '~/store/modules/user/actions';
+import { signOut } from '~/store/modules/auth/actions';
 
 export default function Profile() {
   const profile = useSelector(state => state.user.profile);
@@ -41,6 +49,10 @@ export default function Profile() {
         confirmPassword,
       })
     );
+  }
+
+  function handleLogout() {
+    dispatch(signOut());
   }
 
   return (
@@ -103,8 +115,9 @@ export default function Profile() {
           />
 
           <SubmitButton loading={loading} onPress={handleSubmit}>
-            Salvar
+            Salvar perfil
           </SubmitButton>
+          <LogoutButton onPress={handleLogout}>Sair do Meetup</LogoutButton>
         </Form>
       </Container>
     </Background>
