@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { withNavigationFocus } from 'react-navigation';
 
@@ -64,3 +65,7 @@ Subscriptions.navigationOptions = {
 };
 
 export default withNavigationFocus(Subscriptions);
+Subscriptions.propTypes = {
+  tintColor: PropTypes.string.isRequired,
+  isFocused: PropTypes.bool.isRequired,
+};

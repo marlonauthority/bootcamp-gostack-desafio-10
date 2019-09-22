@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Alert } from 'react-native';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
@@ -143,4 +144,7 @@ Profile.navigationOptions = {
   tabBarIcon: ({ tintColor }) => (
     <Icon name="person" size={20} color={tintColor} />
   ),
+};
+Profile.propTypes = {
+  tintColor: PropTypes.string.isRequired,
 };
