@@ -22,16 +22,11 @@ import {
 } from './styles';
 
 export default function Subscription({ data, cancelSubscription }) {
-  // console.tron.log(data);
   const dateFormatted = useMemo(() => {
-    return format(
-      parseISO(data.meetup.date_hour),
-      "dd 'de' MMMM', às ' HH:mm'",
-      {
-        locale: pt,
-      }
-    );
-  }, [data.meetup.date_hour]);
+    return format(parseISO(data.meetup.date), "dd 'de' MMMM', às ' HH:mm'", {
+      locale: pt,
+    });
+  }, [data.meetup.date]);
 
   return (
     <Wrapper>

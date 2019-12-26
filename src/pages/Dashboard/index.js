@@ -4,6 +4,7 @@ import { TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 
 import { format, subDays, addDays } from 'date-fns';
 import pt from 'date-fns/locale/pt-BR';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '~/services/api';
@@ -18,29 +19,65 @@ export default function Dashboard({ navigation }) {
   const [meetups, setMeetups] = useState([]);
   const [date, setDate] = useState(new Date());
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [page, setPage] = useState(1);
 
   const dateNavigator = useMemo(
     () => format(date, "d 'de' MMMM", { locale: pt }),
     [date]
   );
-  function handlePrevDay() {
-    setDate(subDays(date, 1));
+
+  const dateParsed = useMemo(() => format(date, 'yyyy-MM-dd'), [date]);
+
+  async function loadMeetups() {
+    // iniciamos o loading
+    setLoading(true);
+    try {
+      // -> Chamada a api
+      const response = await api.get('meetups', {
+        params: {
+          page,
+          date: dateParsed,
+        },
+      });
+      // -> Comparacao
+      const data = page === 1 ? response.data : [...meetups, ...response.data];
+      setMeetups(data);
+
+      // agora termina o loading e o refreshing
+      setLoading(false);
+      setRefreshing(false);
+    } catch (err) {
+      setLoading(false);
+    }
   }
-  function handleNextDay() {
-    setDate(addDays(date, 1));
+
+  function loadMore() {
+    const nextPage = page + 1;
+    setPage(nextPage);
+    setLoading(true);
+  }
+
+  function refreshMeetups() {
+    setRefreshing(true);
+    setPage(1);
+    setLoading(true);
+    loadMeetups();
   }
 
   useEffect(() => {
-    async function loadMeetups() {
-      setLoading(true);
-      const response = await api.get('/meetups', {
-        params: { date },
-      });
-      setMeetups(response.data);
-      setLoading(false);
-    }
     loadMeetups();
-  }, [date]);
+  }, [date, page]); //eslint-disable-line
+
+  function handlePrevDay() {
+    setDate(subDays(date, 1));
+    setPage(1);
+  }
+
+  function handleNextDay() {
+    setDate(addDays(date, 1));
+    setPage(1);
+  }
 
   async function handleSubscription(id) {
     await api.post(`/meetups/${id}/subscription`);
@@ -77,6 +114,10 @@ export default function Dashboard({ navigation }) {
                 />
               )}
               ListEmptyComponent={<Empty>Não existem Meetups nesta data</Empty>}
+              onRefresh={refreshMeetups}
+              refreshing={refreshing}
+              onEndReachedThreshold={0.1} // Carrega mais itens quando chegar em 20% d
+              onEndReached={loadMore} // Função que carrega mais itens
             />
           </>
         )}
@@ -91,7 +132,6 @@ Dashboard.navigationOptions = {
   ),
 };
 Dashboard.propTypes = {
-  tintColor: PropTypes.string.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,

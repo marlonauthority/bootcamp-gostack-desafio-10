@@ -23,10 +23,10 @@ import {
 
 export default function Meetup({ titleButton, onSubscription, data }) {
   const dateFormatted = useMemo(() => {
-    return format(parseISO(data.date_hour), "dd 'de' MMMM', às ' HH:mm'", {
+    return format(parseISO(data.date), "dd 'de' MMMM', às ' HH:mm'", {
       locale: pt,
     });
-  }, [data.date_hour]);
+  }, [data.date]);
 
   return (
     <Wrapper past={data.past}>

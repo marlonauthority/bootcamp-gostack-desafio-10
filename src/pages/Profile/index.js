@@ -62,7 +62,8 @@ export default function Profile() {
       await schema.validate(data);
       dispatch(updateProfileRequest(data));
     } catch (err) {
-      Alert.alert('Erro', 'Ocorreu algum nos campos');
+      console.tron.log(err);
+      Alert.alert(err.message);
     }
   }
 
@@ -121,7 +122,7 @@ export default function Profile() {
 
           <FormInput
             secureTextEntry
-            placeholder="Confirmaçaão de senha"
+            placeholder="Confirmação de senha"
             ref={confirmPasswordRef}
             returnKeyType="send"
             onSubmitEditing={handleSubmit}
@@ -144,7 +145,4 @@ Profile.navigationOptions = {
   tabBarIcon: ({ tintColor }) => (
     <Icon name="person" size={20} color={tintColor} />
   ),
-};
-Profile.propTypes = {
-  tintColor: PropTypes.string.isRequired,
 };

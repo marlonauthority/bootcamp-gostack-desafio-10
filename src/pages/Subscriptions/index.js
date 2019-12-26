@@ -66,6 +66,5 @@ Subscriptions.navigationOptions = {
 
 export default withNavigationFocus(Subscriptions);
 Subscriptions.propTypes = {
-  tintColor: PropTypes.string.isRequired,
   isFocused: PropTypes.bool.isRequired,
 };
