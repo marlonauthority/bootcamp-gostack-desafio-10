@@ -3,7 +3,7 @@
 - Rode yarn para instalação das dependencias
 - Rode react-native run-ios
 
-<img src=".github/reactnative.gif" />
+<img src=".github/reactnative.gif"  height="500" />
 
 ---
 
