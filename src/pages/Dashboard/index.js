@@ -21,6 +21,7 @@ export default function Dashboard({ navigation }) {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
 
   const dateNavigator = useMemo(
     () => format(date, "d 'de' MMMM", { locale: pt }),
@@ -29,7 +30,9 @@ export default function Dashboard({ navigation }) {
 
   const dateParsed = useMemo(() => format(date, 'yyyy-MM-dd'), [date]);
 
-  async function loadMeetups() {
+  async function loadMeetups(pageNumber = page) {
+    if (total && pageNumber > total) return;
+
     // iniciamos o loading
     setLoading(true);
     try {
@@ -43,6 +46,9 @@ export default function Dashboard({ navigation }) {
       // -> Comparacao
       const data = page === 1 ? response.data : [...meetups, ...response.data];
       setMeetups(data);
+      const limit = 10;
+      const totalItems = data.lenght;
+      setTotal(Math.floor(totalItems / limit));
 
       // agora termina o loading e o refreshing
       setLoading(false);

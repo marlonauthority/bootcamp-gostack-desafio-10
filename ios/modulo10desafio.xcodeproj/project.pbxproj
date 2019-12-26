@@ -161,7 +161,6 @@
 				047294C32330E7B60ECEAE2C /* Pods-modulo10desafioTests.debug.xcconfig */,
 				14303895812AF130799E4BEF /* Pods-modulo10desafioTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -309,6 +308,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
